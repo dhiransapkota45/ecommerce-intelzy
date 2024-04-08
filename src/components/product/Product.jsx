@@ -19,7 +19,7 @@ const Product = () => {
 
   return (
     <div>
-      <div>
+      <div className=" flex gap-3 flex-wrap">
         {products.map((item, index) => {
           return <ProductCard data={item} />;
         })}

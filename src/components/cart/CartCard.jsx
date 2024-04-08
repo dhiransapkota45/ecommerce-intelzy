@@ -1,25 +1,19 @@
 import React from "react";
-import toast from "react-hot-toast";
 
-const ProductCard = (props) => {
+const CartCard = (props) => {
   const addtocart = async () => {
-    try {
-      const response = await fetch("http://localhost:5000/carts", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(props.data),
-      });
+    console.log(props.data);
+    console.log("clicked");
 
-      const data = await response.json();
-      if (data) {
-        toast.success("Added to cart");
+    const response = await fetch(
+      `http://localhost:5000/carts/${props.data.id}`,
+      {
+        method: "DELETE",
       }
-    } catch (error) {
-      toast.error("Error adding to cart");
-    }
+    );
 
+    const data = await response.json();
+    console.log(data);
   };
   return (
     <div className=" shadow w-80 border">
@@ -36,11 +30,11 @@ const ProductCard = (props) => {
           onClick={addtocart}
           className=" px-4 py-2 bg-red-500 text-white rounded-md"
         >
-          Add to cart
+          Remove
         </button>
       </div>
     </div>
   );
 };
 
-export default ProductCard;
+export default CartCard;

@@ -1,9 +1,29 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
+import CartCard from "./CartCard";
 
 const Cart = () => {
-  return (
-    <div>Cart</div>
-  )
-}
+  const [cartdata, setCartdata] = useState([]);
 
-export default Cart
+  const fetchCartdata = async () => {
+    const response = await fetch("http://localhost:5000/carts");
+    const data = await response.json();
+    setCartdata(data);
+  };
+
+  useEffect(() => {
+    fetchCartdata();
+  }, []);
+  return (
+    <div>
+      {cartdata.length === 0 ? (
+        <div>no items in the cart</div>
+      ) : (
+        cartdata.map((item) => {
+          return <CartCard data={item} />;
+        })
+      )}
+    </div>
+  );
+};
+
+export default Cart;

@@ -19,7 +19,7 @@ const Cart = () => {
         <div>no items in the cart</div>
       ) : (
         cartdata.map((item) => {
-          return <CartCard data={item} />;
+          return <CartCard fetchCartdata={fetchCartdata} data={item} />;
         })
       )}
     </div>

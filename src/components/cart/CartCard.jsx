@@ -13,6 +13,9 @@ const CartCard = (props) => {
     );
 
     const data = await response.json();
+    if(data){
+      props.fetchCartdata();
+    }
     console.log(data);
   };
   return (

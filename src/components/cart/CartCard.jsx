@@ -2,8 +2,6 @@ import React from "react";
 
 const CartCard = (props) => {
   const addtocart = async () => {
-    console.log(props.data);
-    console.log("clicked");
 
     const response = await fetch(
       `http://localhost:5000/carts/${props.data.id}`,
@@ -16,7 +14,6 @@ const CartCard = (props) => {
     if(data){
       props.fetchCartdata();
     }
-    console.log(data);
   };
   return (
     <div className=" shadow w-80 border">

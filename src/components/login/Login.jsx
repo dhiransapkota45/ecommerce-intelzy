@@ -1,13 +1,43 @@
 import React, { useState } from "react";
+import toast from 'react-hot-toast';
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if(password.length < 6){
+      toast.error("Password must be at least 6 characters long")
+      return;
+    }else if(password.length > 16){
+      toast.error("Password must be at most 16 characters long")
+      return;
+    }else{
+      const response = await fetch("https://dummyjson.com/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(
+          {
+            username : email,
+            password : password
+          }
+        ),
+      })
+
+      const data = await response.json();
+      console.log(data);
+      if(data){
+        
+        localStorage.setItem("token",data.token)
+        location.href = "/admin";
+      }
+    }
     // Handle login logic here
-    console.log("Logging in with:", email, password);
+    // console.log("Logging in with:", email, password);
   };
 
   const handleemailchange = (e) => {
@@ -32,7 +62,7 @@ const LoginPage = () => {
               <input
                 id="email-address"
                 name="email"
-                type="email"
+                type="text"
                 autoComplete="email"
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"

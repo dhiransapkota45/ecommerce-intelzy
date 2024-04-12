@@ -11,6 +11,7 @@ import LoginPage from "./components/login/Login";
 import {useLocation} from 'react-router-dom';
 import AdminAdd from "./components/admin/AdminAdd";
 import Admin from "./components/admin/Admin";
+import Editproduct from "./components/admin/Editproduct";
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
 
         <Route path="/admin/add" element={<AdminAdd />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/admin/edit/:id" element={<Editproduct />} />
         <Route path="*" element={<h1>Not Found</h1>} />
       </Routes>
     </div>

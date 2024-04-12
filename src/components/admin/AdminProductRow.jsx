@@ -1,5 +1,6 @@
 import React from "react";
 import toast from "react-hot-toast";
+import { NavLink } from "react-router-dom";
 
 const AdminProductRow = ({ product, index, fetchproducts }) => {
     const deletehandler = async() => {
@@ -14,6 +15,8 @@ const AdminProductRow = ({ product, index, fetchproducts }) => {
         }
 
     }
+
+
   return (
     <tr key={product.id}>
       <td>{index + 1}</td>
@@ -28,7 +31,10 @@ const AdminProductRow = ({ product, index, fetchproducts }) => {
       <td>{product.title}</td>
       <td>{product.category}</td>
       <td>{product.price}</td>
-      <td>
+      <td className=" flex">
+        <div>
+        <NavLink to={`/admin/edit/${product.id}`} >edit</NavLink>
+        </div>
         <button onClick={deletehandler}>delete</button>
       </td>
     </tr>

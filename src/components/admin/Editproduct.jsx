@@ -1,7 +1,27 @@
-import React, { useState } from "react";
-import toast from "react-hot-toast";
+import React, { useEffect, useState } from "react";
 
-const AdminAdd = () => {
+import { useParams } from "react-router-dom";
+
+const Editproduct = () => {
+  const params = useParams();
+  
+  const fetchproduct = async () => {
+    const response = await fetch(`http://localhost:5000/products/${params.id}`);
+    const data = await response.json();
+    if (data) {
+      setProductdata({
+        productname: data.title,
+        category: data.category,
+        productprice: data.price,
+        productimage: data.thumbnail,
+      });
+    }
+  };
+
+  useEffect(() => {
+    fetchproduct();
+  }, []);
+
   const logouthandler = () => {
     localStorage.removeItem("token");
     location.href = "/login";
@@ -26,26 +46,25 @@ const AdminAdd = () => {
       toast.error("Please fill all the fields");
       return;
     } else {
-      const response = await fetch("http://localhost:5000/products", {
-        method: "POST",
+      const response = await fetch(`http://localhost:5000/products/${params.id}`, {
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          title : productdata.productname,
-          category : productdata.category,
-          price : productdata.productprice,
-          thumbnail : productdata.productimage,
+          title: productdata.productname,
+          category: productdata.category,
+          price: productdata.productprice,
+          thumbnail: productdata.productimage,
         }),
       });
 
       const data = await response.json();
-      if(data){
+      if (data) {
         toast.success("Product added successfully");
       }
     }
   };
-
   if (localStorage.getItem("token")) {
     return (
       <div>
@@ -123,4 +142,4 @@ const AdminAdd = () => {
   }
 };
 
-export default AdminAdd;
+export default Editproduct;

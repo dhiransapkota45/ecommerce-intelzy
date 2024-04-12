@@ -14,27 +14,36 @@ const Admin = () => {
   useEffect(() => {
     fetchproducts();
   }, []);
-  return (
-    <div>
-
+  if (localStorage.getItem("token")) {
+    return (
+      <div>
         <NavLink to="/admin/add">Add product</NavLink>
-      <table>
-        <thead className=" border">
-          <th>sn.</th>
-          <th>image</th>
-          <th>name</th>
-          <th>category</th>
-          <th>price</th>
-          <th>action</th>
-        </thead>
-        <tbody>
-          {productdata.map((product, index) => {
-            return <AdminProductRow fetchproducts={fetchproducts} index={index} product={product} />;
-          })}
-        </tbody>
-      </table>
-    </div>
-  );
+        <table>
+          <thead className=" border">
+            <th>sn.</th>
+            <th>image</th>
+            <th>name</th>
+            <th>category</th>
+            <th>price</th>
+            <th>action</th>
+          </thead>
+          <tbody>
+            {productdata.map((product, index) => {
+              return (
+                <AdminProductRow
+                  fetchproducts={fetchproducts}
+                  index={index}
+                  product={product}
+                />
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    );
+  }else{
+    location.href = "/login";
+  }
 };
 
 export default Admin;

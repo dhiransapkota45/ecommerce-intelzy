@@ -11,12 +11,17 @@ const Admin = () => {
     setProductdata(data);
   };
 
+  const logouthandler = () => {
+    localStorage.removeItem("token");
+    location.href = "/login";
+  }
   useEffect(() => {
     fetchproducts();
   }, []);
   if (localStorage.getItem("token")) {
     return (
       <div>
+        <button onClick={logouthandler}>logout</button>
         <NavLink to="/admin/add">Add product</NavLink>
         <table>
           <thead className=" border">

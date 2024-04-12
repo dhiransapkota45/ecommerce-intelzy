@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 
+import axios from "axios";
+
 const AdminAdd = () => {
   const logouthandler = () => {
     localStorage.removeItem("token");
@@ -26,20 +28,29 @@ const AdminAdd = () => {
       toast.error("Please fill all the fields");
       return;
     } else {
-      const response = await fetch("http://localhost:5000/products", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          title : productdata.productname,
-          category : productdata.category,
-          price : productdata.productprice,
-          thumbnail : productdata.productimage,
-        }),
-      });
+      // const response = await fetch("http://localhost:5000/products", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({
+      //     title : productdata.productname,
+      //     category : productdata.category,
+      //     price : productdata.productprice,
+      //     thumbnail : productdata.productimage,
+      //   }),
+      // });
+      // const data = await response.json();
 
-      const data = await response.json();
+      const data = await axios.post("http://localhost:5000/products", {
+        title: productdata.productname,
+        category: productdata.category,
+        price: productdata.productprice,
+        thumbnail: productdata.productimage,
+      })
+
+      console.log(data, "data")
+
       if(data){
         toast.success("Product added successfully");
       }

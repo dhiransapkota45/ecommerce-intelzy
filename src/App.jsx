@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
@@ -6,24 +6,19 @@ import Navbar from "./components/navbar/Navbar";
 import { Routes, Route } from "react-router-dom";
 import Home from "./components/home/Home";
 import Cart from "./components/cart/Cart";
-import { Toaster } from 'react-hot-toast';
+import { Toaster } from "react-hot-toast";
 import LoginPage from "./components/login/Login";
-import {useLocation} from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 import AdminAdd from "./components/admin/AdminAdd";
 import Admin from "./components/admin/Admin";
 import Editproduct from "./components/admin/Editproduct";
 
-
 function App() {
   const location = useLocation();
-  const changehandler = (event) => {
-    setInputdata(event.target.value)
-  }
-
+  
   return (
     <div>
       <Toaster />
-
       
       {location.pathname !== "/login" && <Navbar />}
       <Routes>

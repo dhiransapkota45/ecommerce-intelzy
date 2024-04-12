@@ -539,6 +539,13 @@
       "category": "smartphones",
       "price": 899,
       "thumbnail": "https://cdn.dummyjson.com/product-images/2/thumbnail.jpg"
+    },
+    {
+      "id": "23af",
+      "title": "product12",
+      "category": "famous",
+      "price": "44444",
+      "thumbnail": "https://t3.ftcdn.net/jpg/05/24/30/02/360_F_524300228_egMskw0zvvdwNUFPeJLlplclKzFamXBk.jpg"
     }
   ],
   "carts": [

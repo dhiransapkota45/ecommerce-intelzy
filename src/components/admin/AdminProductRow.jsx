@@ -33,7 +33,7 @@ const AdminProductRow = ({ product, index, fetchproducts }) => {
       <td>{product.price}</td>
       <td className=" flex">
         <div>
-        <NavLink to={`/admin/edit/${product.id}`} >edit</NavLink>
+        <NavLink to={`/admin/edit/${product.id}/`} >edit</NavLink>
         </div>
         <button onClick={deletehandler}>delete</button>
       </td>
